@@ -11,6 +11,6 @@ float multiplicar(float, float);
 float factorial(float);
 void mostrarMenu(float, float);
 void mostrarResultados(float, float, float, float, float, float);
-void ocultarMenu();
+void limpiarConsola();
 
 #endif // FUNCIONES_H_INCLUDED

@@ -1,6 +1,5 @@
 #include <stdio_ext.h>
 #include <stdlib.h>
-
 /**
  * \brief Solicita un numero al usuario y devuelve el resultado
  * \param mensaje Es el mensaje a ser retornado
@@ -94,32 +93,55 @@ float multiplicar(float op1, float op2){
  *
 */
 float factorial(float op){
-    int factorial = 1;
+    int fact = 1;
     int i;
       for(i = 1; i <= op; i++){
-        factorial = factorial * i;
+        fact = fact * i;
       }
-      return factorial;
+      return fact;
 }
 
-void mostrarMenu(op1, op2)
+/**
+ * \brief Imprime por consola el menu de opciones de la calculadora
+ * \param op1 Es el primer operando
+ * \param op2 Es el segundo operando
+ *
+*/
+void mostrarMenu(float op1, float op2)
 {
     printf("Calculadora!!\n");
-    printf("1. Ingresar 1er operando (A=%.2f)\n", op1);
-    printf("2. Ingresar 2do operando (B=%.2f)\n", op2);
+    printf("1. Ingresar 1er operando (A=%.1f)\n", op1);
+    printf("2. Ingresar 2do operando (B=%.1f)\n", op2);
     printf("3. Calcular todas las operaciones\n");
     printf("4. Informar resultados\n");
     printf("5. Salir\n");
 }
 
-void ocultarMenu(){
+/**
+ * \brief limpiar la consola
+ * */
+void limpiarConsola(){
     system("clear");
 }
 
+/**
+ * \brief Imprime por consola el resultado de todas las operaciones
+ * \param resSuma es el resultado de la suma
+ * \param resResta es el resultado de la resta
+ * \param resDivision es el resultado de la division
+ * \param resMultiplicacion es el resultado de la multiplicacion
+ * \param resFactorialA es el resultado del factorial A
+ * \param resFactorialB es el resultado del factorial B
+ *
+*/
 void mostrarResultados(float resSuma, float resResta, float resDivision, float resMultiplicacion, float resFactorialA, float resFactorialB){
-  printf("El resultado de A + B es: %.1f", resSuma);
-  printf("El resultado de A - B es: %.1f", resResta);
-  printf("El resultado de A / B es: %.1f", resDivision);
-  printf("El resultado de A * B es: %.1f", resMultiplicacion);
-  printf("El factorial de A es: %.1f y El factorial de B es: %.1f",resFactorialA, resFactorialB);
+  printf("El resultado de A + B es: %.1f \n", resSuma);
+  printf("El resultado de A - B es: %.1f \n", resResta);
+  //if (resDivision == NaN){
+    printf("No se puede dividir por cero");
+  //}else {
+    printf("El resultado de A / B es: %.1f \n", resDivision);
+  //}
+  printf("El resultado de A * B es: %.1f \n", resMultiplicacion);
+  printf("El factorial de A es: %.1f y El factorial de B es: %.1f\n",resFactorialA, resFactorialB);
 }

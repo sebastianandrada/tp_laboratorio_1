@@ -17,43 +17,40 @@ int main()
 
     while(continuar)
     {
+        limpiarConsola();
         mostrarMenu(op1, op2);
         opcion = getInt("Ingrese una opcion\n");
         switch (opcion)
         {
         case 1:
-            ocultarMenu();
+            limpiarConsola();
             op1 = getFloat("Ingrese un numero\n");
-            ocultarMenu();
-            //mostrarMenu();
             break;
         case 2:
-            ocultarMenu();
-            op1 = getFloat("Ingrese un numero\n");
-            ocultarMenu();
-            //mostrarMenu();
+            limpiarConsola();
+            op2 = getFloat("Ingrese un numero\n");
             break;
         case 3:
-            // calcularOperaciones(op1, op2);
-            ocultarMenu();
+            limpiarConsola();
             resSuma = suma(op1, op2);
             resResta = resta(op1, op2);
             resDivision = dividir(op1, op2);
             resMultiplicacion = multiplicar(op1, op2);
             resFactorialA = factorial(op1);
             resFactorialB = factorial(op2);
-            ocultarMenu();
+            continuar = getChar("Se han realizado las operaciones.\n");
             break;
         case 4:
-            ocultarMenu();
+            limpiarConsola();
             mostrarResultados(resSuma, resResta, resDivision, resMultiplicacion, resFactorialA, resFactorialB);
-            ocultarMenu();
+            continuar = getChar("Los resultados.\n");
             break;
         case 5:
             continuar = 0;
             break;
         default:
-            printf("Ingrese una opcion valida");
+            limpiarConsola();
+            opcion = getInt("Ingrese una opcion valida (1-5)");
             break;
         }
     }
