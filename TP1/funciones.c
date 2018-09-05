@@ -41,6 +41,67 @@ char getChar(char mensaje[]){
   return aux;
 }
 
+/**
+ * \brief Realiza la suma entre dos operandos
+ * \param op1 Es el primer operando
+ * \param op2 Es el segundo operando
+ * \return El resultado de la suma entre los dos operandos
+ *
+*/
+float suma(float op1, float op2){
+  return op1 + op2;
+}
+
+/**
+ * \brief Realiza la resta entre dos operandos
+ * \param op1 Es el primer operando
+ * \param op2 Es el segundo operando
+ * \return El resultado de la resta entre los dos operandos
+ *
+*/
+float resta(float op1, float op2){
+  return op1 - op2;
+}
+
+/**
+ * \brief Realiza la division entre dos operandos
+ * \param op1 Es el primer operando
+ * \param op2 Es el segundo operando
+ * \return El resultado de la division entre los dos operandos
+ *
+*/
+float dividir(float op1, float op2){
+  return op1 / op2;
+
+}
+
+/**
+ * \brief Realiza la multiplicacion entre dos operandos
+ * \param op1 Es el primer operando
+ * \param op2 Es el segundo operando
+ * \return El resultado de la multiplicacion entre los dos operandos
+ *
+*/
+float multiplicar(float op1, float op2){
+  return op1 * op2;
+}
+
+/**
+ * \brief Realiza el factorial de un numero
+ * \param op1 Es el primer operando
+ * \param op2 Es el segundo operando
+ * \return El resultado de el factorial de un numero
+ *
+*/
+float factorial(float op){
+    int factorial = 1;
+    int i;
+      for(i = 1; i <= op; i++){
+        factorial = factorial * i;
+      }
+      return factorial;
+}
+
 void mostrarMenu(op1, op2)
 {
     printf("Calculadora!!\n");
@@ -53,4 +114,12 @@ void mostrarMenu(op1, op2)
 
 void ocultarMenu(){
     system("clear");
+}
+
+void mostrarResultados(float resSuma, float resResta, float resDivision, float resMultiplicacion, float resFactorialA, float resFactorialB){
+  printf("El resultado de A + B es: %.1f", resSuma);
+  printf("El resultado de A - B es: %.1f", resResta);
+  printf("El resultado de A / B es: %.1f", resDivision);
+  printf("El resultado de A * B es: %.1f", resMultiplicacion);
+  printf("El factorial de A es: %.1f y El factorial de B es: %.1f",resFactorialA, resFactorialB);
 }
