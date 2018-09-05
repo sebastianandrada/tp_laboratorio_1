@@ -40,3 +40,17 @@ char getChar(char mensaje[]){
   scanf("%c", &aux);
   return aux;
 }
+
+void mostrarMenu(op1, op2)
+{
+    printf("Calculadora!!\n");
+    printf("1. Ingresar 1er operando (A=%.2f)\n", op1);
+    printf("2. Ingresar 2do operando (B=%.2f)\n", op2);
+    printf("3. Calcular todas las operaciones\n");
+    printf("4. Informar resultados\n");
+    printf("5. Salir\n");
+}
+
+void ocultarMenu(){
+    system("clear");
+}
