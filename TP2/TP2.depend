@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1537921780 source:/home/sebaaa/Documentos/proyectos/utn/prog_labo_1/tp_laboratorio_1/TP2/main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"ArrayEmployees.h"
+
+1537914318 source:/home/sebaaa/Documentos/proyectos/utn/prog_labo_1/tp_laboratorio_1/TP2/utn.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1537913149 /home/sebaaa/Documentos/proyectos/utn/prog_labo_1/tp_laboratorio_1/TP2/utn.h
+
+1537923057 source:/home/sebaaa/Documentos/proyectos/utn/prog_labo_1/tp_laboratorio_1/TP2/ArrayEmployees.c
+	<stdio.h>
+	"ArrayEmployees.h"
+	"utn.h"
+	<string.h>
+
+1537911715 /home/sebaaa/Documentos/proyectos/utn/prog_labo_1/tp_laboratorio_1/TP2/ArrayEmployees.h
+
