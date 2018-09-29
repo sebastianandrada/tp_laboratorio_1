@@ -2,33 +2,58 @@
 #include <stdlib.h>
 #include "utn.h"
 #include "ArrayEmployees.h"
-#define CANT_EMPLADOS 200
+#define CANT_EMPLADOS 1000
 
 int main()
 {
-  /*   int enen;
-    utn_getInt(&enen, 5, "Ingrese un entero: ", "no!\n", 0, 5000);
-    printf("El entero es %d\n", enen);
-    float flflo;
-    utn_getFloat(&flflo, 5, "Ingrese un flotante: ", "no!\n", 0.0, 5000.0);
-    printf("El flotante es %.2f", flflo);
-    char cadena[1250];
-    utn_getString(&cadena, 5, "Ingrese su nombre papu", "no!", 1250);
-    printf("Su nombre es: %s", cadena); */
 
-    int rdoInit;
-    int rdoAdd;
-    int rdoPrint;
+  Employee empleados[CANT_EMPLADOS];
+  initEmployees(empleados, CANT_EMPLADOS);
+  cargaForzadaEmployee(empleados, CANT_EMPLADOS, "Mariana", "Siri", 14000.12, 3);
+  cargaForzadaEmployee(empleados, CANT_EMPLADOS, "Rosario", "De Pedro", 45431.51, 1);
+  cargaForzadaEmployee(empleados, CANT_EMPLADOS, "Marcos", "Presley", 10000.50, 14);
+  cargaForzadaEmployee(empleados, CANT_EMPLADOS, "Juliana", "Aguad", 45666.4, 12);
+  cargaForzadaEmployee(empleados, CANT_EMPLADOS, "Pedro", "Buley", 17566.3, 12);
 
-    Employee empleados[CANT_EMPLADOS];
-    rdoInit = initEmployees(empleados, CANT_EMPLADOS);
-    printf("Rdo initEmployees:  %d\n", rdoInit);
+  int opcion;
+  int id;
+  int opcionInforme;
 
-    rdoAdd = addEmployee(empleados, CANT_EMPLADOS, "as","df", 2220.2, 1);
-    printf("Rdo addEmployees: %d\n", rdoAdd);
+  do
+  {
+    utn_getInt(&opcion, 5, "\n1)Alta empleado\n2)Modificar empleado\n3)Baja de empleado\n4)Informar\nElija una opcion ",
+               "Elige una opcion valida ", 0, 6);
+    switch (opcion)
+    {
+    case 1:
+      if (addEmployee(empleados, CANT_EMPLADOS) == 0)
+      {
+        printf("\nCarga exitosa!\n");
+      }
+      else
+      {
+        printf("Ocurrio un error en la carga de usuario");
+      }
+      break;
+    case 2:
+      utn_getInt(&id, 10, "Ingrese id de empleado a Modificar ", "Id invalido", 0, CANT_EMPLADOS);
+      modifyEmployee(empleados, CANT_EMPLADOS, id);
+      break;
+    case 3:
+      utn_getInt(&id, 10, "Ingrese id de empleado a Modificar ", "Id invalido", 0, CANT_EMPLADOS);
+      removeEmployee(empleados, CANT_EMPLADOS, id);
+      break;
+    case 4:
+      utn_getInt(&opcionInforme, 5, "\n1)Listar empleados alfabeticamente por apellido y sector\n2)Total y promedio de salarios, cantidad de empleados que superan el salario promedio\nElija una opcion ",
+                 "Elija una opcion valida (1,2)\n", 1, 2);
+      //imformeEmployees(empleados, CANT_EMPLADOS, opcionInforme);
+      printf("\nTu vieja");
+      break;
+    case 5:
+      printEmployees(empleados, CANT_EMPLADOS);
+    }
 
-    rdoPrint = printEmployees(empleados, CANT_EMPLADOS);
-    printf("Rdo print: %d\n", rdoPrint);
+  } while (opcion != 0);
 
-    return 0;
+  return 0;
 }
