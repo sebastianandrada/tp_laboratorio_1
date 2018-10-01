@@ -87,5 +87,16 @@ find a employee] - (0) if Ok
 */
 int modifyEmployee(Employee* list, int len, int id);
 
+/** \brief Sort the elements in the array of employees, the argument order
+indicate UP or DOWN order
+*
+* \param list Employee*
+* \param len int
+* \param order int [1] indicate UP - [0] indicate DOWN
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*
+*/
+int sortEmployees(Employee* list, int len, int order);
+
 void cargaForzadaEmployee(Employee* list, int len, char* name, char* lastName, float salary, int sector);
 #endif // ARRAYEMPLOYEES_H_INCLUDED

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "utn.h"
+//#include "ArrayEmployees.h"
 #include "ArrayEmployees.h"
 #define CANT_EMPLADOS 1000
 
@@ -47,7 +48,8 @@ int main()
       utn_getInt(&opcionInforme, 5, "\n1)Listar empleados alfabeticamente por apellido y sector\n2)Total y promedio de salarios, cantidad de empleados que superan el salario promedio\nElija una opcion ",
                  "Elija una opcion valida (1,2)\n", 1, 2);
       //imformeEmployees(empleados, CANT_EMPLADOS, opcionInforme);
-      printf("\nTu vieja");
+      sortEmployees(empleados, CANT_EMPLADOS, 0);
+      printEmployees(empleados, CANT_EMPLADOS);
       break;
     case 5:
       printEmployees(empleados, CANT_EMPLADOS);
