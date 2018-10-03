@@ -53,7 +53,6 @@ int main()
       if (utn_getInt(&opcionInforme, 5, "\n1)Listar empleados alfabeticamente por apellido y sector\n2)Total y promedio de salarios, cantidad de empleados que superan el salario promedio\nElija una opcion ",
                      "Elija una opcion valida (1,2)\n", 1, 3) == 0)
       {
-        printf("\nopcionInforme: %d", opcionInforme);
         switch (opcionInforme)
         {
         case 1:
@@ -113,8 +112,7 @@ int main()
         printEmployees(empleados, CANT_EMPLADOS);
       }
     }
-    while (opcion != 0)
-      ;
+  } while (opcion != 0);
 
-    return 0;
-  }
+  return 0;
+}

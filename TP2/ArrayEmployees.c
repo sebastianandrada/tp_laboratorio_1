@@ -242,7 +242,7 @@ int sortEmployeesByLastName(Employee *list, int len, int order)
   {
     temp = list[i];
     j = i - 1;
-    while (j >= 0 && (strncmp(temp.lastName, list[j].lastName, 51) < 0) && order==1)
+    while (j >= 0 && ( ((strncmp(temp.lastName, list[j].lastName, 51) < 0)  && order==1) || (order == 0 && (strncmp(temp.lastName, list[j].lastName, 51) > 0)) ))
     {
       list[j + 1] = list[j];
       j--;
