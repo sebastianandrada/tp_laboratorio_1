@@ -129,7 +129,7 @@ int modifyEmployee(Employee *list, int len, int id)
     do
     {
       utn_getInt(&opcion, 5, "Campo a modificar\n1)Nombre\n2)Apellido\n3)Salario\n4)Sector\n0)Volver a menu principal\n",
-                 "Opciones validas (0,4)\n", 0, 4);
+                 "Opciones validas (0,4)\n", 0, 7);
 
       switch (opcion)
       {
@@ -189,32 +189,7 @@ void cargaForzadaEmployee(Employee *list, int len, char *name, char *lastName, f
   }
 }
 
-/*9 7 6 15 16 5 10 11
-temp = 7
-j = 0
-7 < 9
 
-data[1] = 9
-
-7*/
-
-int sortEmployees(Employee *list, int len, int order)
-{
-  int i, j;
-  Employee temp;
-  for (i = 0; i < len; i++)
-  {
-    temp = list[i];
-    j = i - 1;
-    while (j >= 0 && (order == 0 && temp.sector < list[j].sector))
-    {
-      list[j + 1] = list[j];
-      j--;
-    }
-    list[j + 1] = temp;
-  }
-  return 0;
-}
 
 int sortEmployeesBySector(Employee *list, int len, int order)
 {

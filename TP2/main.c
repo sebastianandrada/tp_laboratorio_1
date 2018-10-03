@@ -46,7 +46,7 @@ int main()
       modifyEmployee(empleados, CANT_EMPLADOS, id);
       break;
     case 3:
-      utn_getInt(&id, 10, "Ingrese id de empleado a Modificar ", "Id invalido", 0, CANT_EMPLADOS);
+      utn_getInt(&id, 10, "Ingrese id de empleado a Eliminar ", "Id invalido", 0, CANT_EMPLADOS);
       removeEmployee(empleados, CANT_EMPLADOS, id);
       break;
     case 4:
@@ -58,7 +58,7 @@ int main()
         case 1:
           if (utn_getInt(&opcionCampoEmpleado, 5, "\n1)Listar por apellido\n2)Listar por sector\nElija una opcion", "Elija una opcion valida (1,2)\n", 1, 3) == 0)
           {
-            if (utn_getInt(&opcionOrden, 5, "Elija orden:\n1)Ascendente\n2)Descendente", "\nElija una opcion valida\n", 1, 3) == 0)
+            if (utn_getInt(&opcionOrden, 5, "Elija orden:\n1)Ascendente\n2)Descendente\n", "\nElija una opcion valida\n", 1, 3) == 0)
             {
               switch (opcionCampoEmpleado)
               {
