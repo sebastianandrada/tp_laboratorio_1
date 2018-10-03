@@ -96,8 +96,30 @@ indicate UP or DOWN order
 * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
 *
 */
-int sortEmployees(Employee* list, int len, int order);
+int sortEmployeesBySector(Employee* list, int len, int order);
+int sortEmployeesByLastName(Employee* list, int len, int order);
+
+/** \brief get the active employee's salary average
+* \param list Employee*
+* \param len int
+* \return float Return (-1) if Error [Invalid length or NULL pointer] - average salary
+*/
 float getSalarioPromedio(Employee* list, int len);
+
+/** \brief get the active employee's salary total
+* \param list Employee*
+* \param len int
+* \return float Return (-1) if Error [Invalid length or NULL pointer] - total salary
+*/
 float getSalarioTotal(Employee* list, int len);
+
+/** \brief charges a employee to the employee's list
+* \param list Employee*
+* \param len int
+* \param char* name
+* \param char* lastName
+* \param float salary
+* \param int sector
+*/
 void cargaForzadaEmployee(Employee* list, int len, char* name, char* lastName, float salary, int sector);
 #endif // ARRAYEMPLOYEES_H_INCLUDED

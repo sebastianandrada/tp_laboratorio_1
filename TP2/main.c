@@ -19,6 +19,8 @@ int main()
   int opcion;
   int id;
   int opcionInforme;
+  int opcionCampoEmpleado;
+  int opcionOrden;
   float auxSalarioTotal;
   float auxSalarioPromedio;
   int cantEmpleadosSuperaProm;
@@ -55,34 +57,64 @@ int main()
         switch (opcionInforme)
         {
         case 1:
-          if (sortEmployees(empleados, CANT_EMPLADOS, 0) == 0)
+          if (utn_getInt(&opcionCampoEmpleado, 5, "\n1)Listar por apellido\n2)Listar por sector\nElija una opcion", "Elija una opcion valida (1,2)\n", 1, 3) == 0)
           {
-            printEmployees(empleados, CANT_EMPLADOS);
-          }
-          break;
-        case 2:
-
-          auxSalarioTotal = getSalarioTotal(empleados, CANT_EMPLADOS);
-          printf("\nSalario total: $%.2f\n", auxSalarioTotal);
-          auxSalarioPromedio = getSalarioPromedio(empleados, CANT_EMPLADOS);
-          printf("\nSalario promedio: $%.2f\n", auxSalarioPromedio);
-          for (int i = 0; i < CANT_EMPLADOS; i++)
-          {
-            if (empleados[i].salary > auxSalarioPromedio && empleados[i].isEmpty == 0)
+            if (utn_getInt(&opcionOrden, 5, "Elija orden:\n1)Ascendente\n2)Descendente", "\nElija una opcion valida\n", 1, 3) == 0)
             {
-              cantEmpleadosSuperaProm++;
+              switch (opcionCampoEmpleado)
+              {
+              case 1:
+                if (opcionOrden == 1)
+                {
+                  sortEmployeesByLastName(empleados, CANT_EMPLADOS, 1);
+                  printEmployees(empleados, CANT_EMPLADOS);
+                }
+                else
+                {
+                  sortEmployeesByLastName(empleados, CANT_EMPLADOS, 0);
+                  printEmployees(empleados, CANT_EMPLADOS);
+                }
+                break;
+
+              case 2:
+                if (opcionOrden == 1)
+                {
+                  sortEmployeesBySector(empleados, CANT_EMPLADOS, 1);
+                  printEmployees(empleados, CANT_EMPLADOS);
+                }
+                else
+                {
+                  sortEmployeesBySector(empleados, CANT_EMPLADOS, 0);
+                  printEmployees(empleados, CANT_EMPLADOS);
+                }
+                break;
+              }
             }
+            break;
+          case 2:
+
+            auxSalarioTotal = getSalarioTotal(empleados, CANT_EMPLADOS);
+            printf("\nSalario total: $%.2f\n", auxSalarioTotal);
+            auxSalarioPromedio = getSalarioPromedio(empleados, CANT_EMPLADOS);
+            printf("\nSalario promedio: $%.2f\n", auxSalarioPromedio);
+            for (int i = 0; i < CANT_EMPLADOS; i++)
+            {
+              if (empleados[i].salary > auxSalarioPromedio && empleados[i].isEmpty == 0)
+              {
+                cantEmpleadosSuperaProm++;
+              }
+            }
+            printf("Cantidad de empleados que superan el promedio: %d\n", cantEmpleadosSuperaProm);
+            break;
           }
-          printf("Cantidad de empleados que superan el promedio: %d\n", cantEmpleadosSuperaProm);
-          break;
         }
+        break;
+      case 5:
+        printEmployees(empleados, CANT_EMPLADOS);
       }
-      break;
-    case 5:
-      printEmployees(empleados, CANT_EMPLADOS);
     }
+    while (opcion != 0)
+      ;
 
-  } while (opcion != 0);
-
-  return 0;
-}
+    return 0;
+  }

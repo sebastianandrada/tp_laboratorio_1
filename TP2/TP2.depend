@@ -21,3 +21,19 @@
 
 1538539357 /home/sebaaa/Documentos/proyectos/utn/prog_labo_1/tp_laboratorio_1/TP2/ArrayEmployees.h
 
+1538570502 source:d:\tp_laboratorio_1\tp2\arrayemployees.c
+	<stdio.h>
+	"ArrayEmployees.h"
+	"utn.h"
+	<string.h>
+
+1538570502 d:\tp_laboratorio_1\tp2\arrayemployees.h
+
+1538398588 d:\tp_laboratorio_1\tp2\utn.h
+
+1538570502 source:d:\tp_laboratorio_1\tp2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"ArrayEmployees.h"
+

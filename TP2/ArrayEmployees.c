@@ -200,56 +200,56 @@ data[1] = 9
 
 int sortEmployees(Employee *list, int len, int order)
 {
-  /*   int i,j;
+  int i, j;
   Employee temp;
-  for( i = 0; i < len; i++)
+  for (i = 0; i < len; i++)
   {
     temp = list[i];
-    j= i-1;
-    while(j>=0 && (order == 0 && temp.sector < list[j].sector)){
-      list[j+1] = list[j];
+    j = i - 1;
+    while (j >= 0 && (order == 0 && temp.sector < list[j].sector))
+    {
+      list[j + 1] = list[j];
       j--;
     }
-    list[j+1] = temp;
+    list[j + 1] = temp;
   }
-  return 0; */
-  int retorno = -1;
-  Employee auxlist;
+  return 0;
+}
+
+int sortEmployeesBySector(Employee *list, int len, int order)
+{
   int i, j;
-  if (list != NULL)
+  Employee temp;
+  for (i = 0; i < len; i++)
   {
-    for (i = 0; i < len - 1; i++)
+    temp = list[i];
+    j = i - 1;
+    while (j >= 0 && ((order == 0 && temp.sector < list[j].sector) || (order == 1 && temp.sector > list[j].sector)))
     {
-      if (list[i].isEmpty == 1)
-      {
-        continue;
-      }
-      for (j = i + 1; j < len; j++)
-      {
-        if (list[j].isEmpty == 1)
-        {
-          continue;
-        }
-        if ((order == 0 && strcmp(list[j].lastName, list[i].lastName) < 0) || (order == 1 && strcmp(list[j].lastName, list[i].lastName) > 0))
-        {
-          auxlist = list[j];
-          list[j] = list[i];
-          list[i] = auxlist;
-        }
-        else if (strcmp(list[j].lastName, list[i].lastName) == 0)
-        {
-          if ((order == 0 && list[j].sector < list[i].sector) || (order == 1 && list[j].sector > list[i].sector))
-          {
-            auxlist = list[j];
-            list[j] = list[i];
-            list[i] = auxlist;
-          }
-        }
-      }
+      list[j + 1] = list[j];
+      j--;
     }
-    retorno = 0;
+    list[j + 1] = temp;
   }
-  return retorno;
+  return 0;
+}
+
+int sortEmployeesByLastName(Employee *list, int len, int order)
+{
+  int i, j;
+  Employee temp;
+  for (i = 0; i < len; i++)
+  {
+    temp = list[i];
+    j = i - 1;
+    while (j >= 0 && (strncmp(temp.lastName, list[j].lastName, 51) < 0) && order==1)
+    {
+      list[j + 1] = list[j];
+      j--;
+    }
+    list[j + 1] = temp;
+  }
+  return 0;
 }
 
 float getSalarioTotal(Employee *list, int len)
