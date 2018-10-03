@@ -97,6 +97,7 @@ indicate UP or DOWN order
 *
 */
 int sortEmployees(Employee* list, int len, int order);
-
+float getSalarioPromedio(Employee* list, int len);
+float getSalarioTotal(Employee* list, int len);
 void cargaForzadaEmployee(Employee* list, int len, char* name, char* lastName, float salary, int sector);
 #endif // ARRAYEMPLOYEES_H_INCLUDED

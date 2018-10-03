@@ -150,7 +150,7 @@ int modifyEmployee(Employee *list, int len, int id)
         }
         break;
       case 3:
-        if(utn_getFloat(&auxSalary, 5, "Ingrese salario $", "no!", 0.0, 50000000000.0) == 0)
+        if (utn_getFloat(&auxSalary, 5, "Ingrese salario $", "no!", 0.0, 50000000000.0) == 0)
         {
           list[index].salary = auxSalary;
           retorno = 0;
@@ -158,7 +158,7 @@ int modifyEmployee(Employee *list, int len, int id)
         }
         break;
       case 4:
-        if(utn_getInt(&auxSector, 5, "Ingrese sector ", "no!", 0, 9999) == 0)
+        if (utn_getInt(&auxSector, 5, "Ingrese sector ", "no!", 0, 9999) == 0)
         {
           list[index].sector = auxSector;
           retorno = 0;
@@ -198,9 +198,9 @@ data[1] = 9
 
 7*/
 
-int sortEmployees(Employee* list, int len, int order)
+int sortEmployees(Employee *list, int len, int order)
 {
-  int i,j;
+  /*   int i,j;
   Employee temp;
   for( i = 0; i < len; i++)
   {
@@ -212,6 +212,81 @@ int sortEmployees(Employee* list, int len, int order)
     }
     list[j+1] = temp;
   }
+  return 0; */
+  int retorno = -1;
+  Employee auxlist;
+  int i, j;
+  if (list != NULL)
+  {
+    for (i = 0; i < len - 1; i++)
+    {
+      if (list[i].isEmpty == 1)
+      {
+        continue;
+      }
+      for (j = i + 1; j < len; j++)
+      {
+        if (list[j].isEmpty == 1)
+        {
+          continue;
+        }
+        if ((order == 0 && strcmp(list[j].lastName, list[i].lastName) < 0) || (order == 1 && strcmp(list[j].lastName, list[i].lastName) > 0))
+        {
+          auxlist = list[j];
+          list[j] = list[i];
+          list[i] = auxlist;
+        }
+        else if (strcmp(list[j].lastName, list[i].lastName) == 0)
+        {
+          if ((order == 0 && list[j].sector < list[i].sector) || (order == 1 && list[j].sector > list[i].sector))
+          {
+            auxlist = list[j];
+            list[j] = list[i];
+            list[i] = auxlist;
+          }
+        }
+      }
+    }
+    retorno = 0;
+  }
+  return retorno;
+}
+
+float getSalarioTotal(Employee *list, int len)
+{
+  int retorno = -1;
+  int i;
+  float salarioTotal = 0;
+  for (i = 0; i < len; i++)
+  {
+    if (list[i].isEmpty == 0)
+    {
+      salarioTotal = salarioTotal + list[i].salary;
+      retorno = salarioTotal;
+    }
+  }
+  return retorno;
+}
+
+float getSalarioPromedio(Employee *list, int len)
+{
+  int i;
+  float salarioTotal = 0;
+  int cantEmployees = 0;
+
+  for (i = 0; i < len; i++)
+  {
+    if (list[i].isEmpty == 0)
+    {
+      salarioTotal = salarioTotal + list[i].salary;
+      cantEmployees++;
+    }
+  }
+  if (cantEmployees == 0)
+  {
+    return -1;
+  }
+  return (salarioTotal / (float)cantEmployees);
 }
 
 /**********estaticas*****************/

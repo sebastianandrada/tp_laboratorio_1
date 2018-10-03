@@ -19,10 +19,13 @@ int main()
   int opcion;
   int id;
   int opcionInforme;
+  float auxSalarioTotal;
+  float auxSalarioPromedio;
+  int cantEmpleadosSuperaProm;
 
   do
   {
-    utn_getInt(&opcion, 5, "\n1)Alta empleado\n2)Modificar empleado\n3)Baja de empleado\n4)Informar\nElija una opcion ",
+    utn_getInt(&opcion, 5, "\n1)Alta empleado\n2)Modificar empleado\n3)Baja de empleado\n4)Informar\n0)Salir\nElija una opcion ",
                "Elige una opcion valida ", 0, 6);
     switch (opcion)
     {
@@ -45,11 +48,35 @@ int main()
       removeEmployee(empleados, CANT_EMPLADOS, id);
       break;
     case 4:
-      utn_getInt(&opcionInforme, 5, "\n1)Listar empleados alfabeticamente por apellido y sector\n2)Total y promedio de salarios, cantidad de empleados que superan el salario promedio\nElija una opcion ",
-                 "Elija una opcion valida (1,2)\n", 1, 2);
-      //imformeEmployees(empleados, CANT_EMPLADOS, opcionInforme);
-      sortEmployees(empleados, CANT_EMPLADOS, 0);
-      printEmployees(empleados, CANT_EMPLADOS);
+      if (utn_getInt(&opcionInforme, 5, "\n1)Listar empleados alfabeticamente por apellido y sector\n2)Total y promedio de salarios, cantidad de empleados que superan el salario promedio\nElija una opcion ",
+                     "Elija una opcion valida (1,2)\n", 1, 3) == 0)
+      {
+        printf("\nopcionInforme: %d", opcionInforme);
+        switch (opcionInforme)
+        {
+        case 1:
+          if (sortEmployees(empleados, CANT_EMPLADOS, 0) == 0)
+          {
+            printEmployees(empleados, CANT_EMPLADOS);
+          }
+          break;
+        case 2:
+
+          auxSalarioTotal = getSalarioTotal(empleados, CANT_EMPLADOS);
+          printf("\nSalario total: $%.2f\n", auxSalarioTotal);
+          auxSalarioPromedio = getSalarioPromedio(empleados, CANT_EMPLADOS);
+          printf("\nSalario promedio: $%.2f\n", auxSalarioPromedio);
+          for (int i = 0; i < CANT_EMPLADOS; i++)
+          {
+            if (empleados[i].salary > auxSalarioPromedio && empleados[i].isEmpty == 0)
+            {
+              cantEmpleadosSuperaProm++;
+            }
+          }
+          printf("Cantidad de empleados que superan el promedio: %d\n", cantEmpleadosSuperaProm);
+          break;
+        }
+      }
       break;
     case 5:
       printEmployees(empleados, CANT_EMPLADOS);
