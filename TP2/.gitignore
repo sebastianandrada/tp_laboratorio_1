@@ -1,7 +1,0 @@
-# Project
-.vscode
-*.layout
-*.depend
-bin/
-obj/
-*.o

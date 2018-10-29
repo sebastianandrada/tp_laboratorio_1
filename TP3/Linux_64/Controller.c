@@ -57,7 +57,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
 int controller_editEmployee(LinkedList* pArrayListEmployee)
 {
     //
-    //index =
+    index = buscarEmpleadoPorId(pArrayListEmployee, id);
     ll_get(pArrayListEmployee, index );
     return 1;
 }
