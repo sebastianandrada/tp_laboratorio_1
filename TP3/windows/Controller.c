@@ -59,9 +59,9 @@ int controller_addEmployee(LinkedList *pArrayListEmployee)
     Employee *auxEmployee;
 
     if (pArrayListEmployee != NULL &&
-        utn_getString(auxName, 5, "Ingrese un nombre: \n", "Dato invalido\n", 128) == 0 &&
-        utn_getString(auxHorasTrabajadas, 5, "Ingrese las horas trabajadas\n", "Dato invalido\n", 40) == 0 &&
-        utn_getString(auxSueldo, 5, "Ingrese el sueldo\n", "Dato invalido\n", 40) == 0)
+        (utn_getString(auxName, 5, "Ingrese un nombre: \n", "Dato invalido\n", 128) == 0) &&
+        (utn_getString(auxHorasTrabajadas, 5, "Ingrese las horas trabajadas\n", "Dato invalido\n", 40) == 0) &&
+        (utn_getString(auxSueldo, 5, "Ingrese el sueldo\n", "Dato invalido\n", 40) == 0))
     {
         retorno = 0;
         auxEmployee = employee_newParametros("-1", auxName, auxHorasTrabajadas, auxSueldo);
@@ -171,7 +171,7 @@ int controller_ListEmployee(LinkedList *pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList *pArrayListEmployee)
 {
-    ll_sort()
+    //ll_sort()
     return 1;
 }
 
