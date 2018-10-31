@@ -5,6 +5,8 @@
 #include "parser.h"
 #include "utn.h"
 
+static int compararEmpleados(void* pEmp1, void* pEmp2);
+
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  *
  * \param path char*
@@ -16,7 +18,8 @@ int controller_loadFromText(char *path, LinkedList *pArrayListEmployee)
 {
     int retorno = -1;
     FILE *pFile;
-    if (pFile = fopen("data.csv", "r") == NULL)
+    pFile = fopen("data.csv", "r");
+    if (pFile == NULL)
     {
         printf("\nEl archivo no puede ser abierto");
         retorno = -1;
@@ -80,7 +83,7 @@ int controller_addEmployee(LinkedList *pArrayListEmployee)
  */
 int controller_editEmployee(LinkedList *pArrayListEmployee)
 {
-    int retorno = -1;
+    /* int retorno = -1;
     char auxName[128];
     int auxHorasTrabajadas;
     int auxSueldo;
@@ -99,7 +102,8 @@ int controller_editEmployee(LinkedList *pArrayListEmployee)
         employee_setSueldo(auxEmployee, auxSueldo);
         retorno = 0;
     }
-    return retorno;
+    return retorno; */
+    return 1;
 }
 
 /** \brief Baja de empleado
@@ -114,7 +118,7 @@ int controller_removeEmployee(LinkedList *pArrayListEmployee)
     //get posicion del emp
     //free a eso
     // y luego remove espacion en memoria
-    int retorno = -1;
+    /* int retorno = -1;
     int id;
     int index = findEmployeeById(pArrayListEmployee, id);
     if ((utn_getInt(&id, 3, "Ingrese id del empleado a editar", "Id invalido", 0, 40000) == 0) &&
@@ -125,7 +129,8 @@ int controller_removeEmployee(LinkedList *pArrayListEmployee)
         ll_remove(pArrayListEmployee, index);
         retorno = 0;
     }
-    return retorno;
+    return retorno; */
+    return 1;
 }
 
 /** \brief Listar empleados
@@ -171,7 +176,8 @@ int controller_ListEmployee(LinkedList *pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList *pArrayListEmployee)
 {
-    //ll_sort()
+    ll_sort(pArrayListEmployee, compararEmpleados,0);
+    printf("Ordenacion wxitosa");
     return 1;
 }
 
@@ -210,8 +216,8 @@ int findEmployeeById(LinkedList *pArrayListEmployee, int id)
     {
         for (i = 0; i < len; i++)
         {
-            auxE = ll_get(pArrayListEmployee, i);
-            employee_getId(auxE, auxId);
+            auxE = (Employee*)ll_get(pArrayListEmployee, i);
+            employee_getId(auxE, &auxId);
             if (auxId == id)
             {
                 index = i;
@@ -223,12 +229,10 @@ int findEmployeeById(LinkedList *pArrayListEmployee, int id)
     return index;
 }
 
-int compararEmpleados(void* pEmp1, void* pEmp2)
+static int compararEmpleados(void* pEmp1, void* pEmp2)
 {
-    Employee* auxEmp1 = pEmp1;
-    Employee* auxEmp2 = pEmp2;
-    int auxSueldoEmp1 = employee_getSueldo(pEmp1, auxSueldoEmp1);
-    int auxSueldoEmp2 = employee_getSueldo(pEmp1, auxSueldoEmp2);
+    int auxSueldoEmp1 = employee_getSueldo(pEmp1, &auxSueldoEmp1);
+    int auxSueldoEmp2 = employee_getSueldo(pEmp1, &auxSueldoEmp2);
 
     if(auxSueldoEmp1 > auxSueldoEmp2)
     {
@@ -241,7 +245,7 @@ int compararEmpleados(void* pEmp1, void* pEmp2)
     return 0;
 }
 
-/* int compareEmployee(void* pEmployeeA,void* pEmployeeB)
+/*int compareEmployee(void* pEmployeeA,void* pEmployeeB)
 {
 
     if(((Employee*)pEmployeeA)->salary > ((Employee*)pEmployeeB)->salary)
@@ -255,4 +259,4 @@ int compararEmpleados(void* pEmp1, void* pEmp2)
     return 0;
 
 
-} */
+}*/
