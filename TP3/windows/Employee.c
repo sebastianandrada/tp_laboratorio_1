@@ -2,7 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//Implementar isValid's
+#include "utn.h"
+
+static int isValidId(int id);
+static int isValidNombre(char* nombre);
+static int isValidHorasTrabajadas(int horasTrabajadas);
+static int isValidSueldo(int sueldo);
 
 Employee* employee_new()
 {
@@ -15,7 +20,7 @@ void employee_delete(Employee* this)
 {
     free(this);
 }
-//Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr);
+
 Employee* employee_newParametros(char* idStr,char* nombreStr, char* horasTrabajadasStr,char* sueldoStr)
 {
     Employee* this;
@@ -39,7 +44,7 @@ int employee_setId(Employee* this,int id)
     int retorno=-1;
     static int proximoId=-1;
 
-    if(this!=NULL && id==-1)
+    if(this!=NULL && isValidId(id))
     {
         proximoId++;
         this->id=proximoId;
@@ -68,7 +73,7 @@ int employee_getId(Employee* this,int* id)
 int employee_setNombre(Employee* this,char* nombre)
 {
     int retorno=-1;
-    if(this!=NULL && nombre!=NULL)
+    if(this!=NULL && isValidNombre(nombre))
     {
         strcpy(this->nombre,nombre);
         retorno=0;
@@ -90,7 +95,7 @@ int employee_getNombre(Employee* this,char* nombre)
 int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 {
     int retorno=-1;
-    if(this!=NULL)
+    if(this!=NULL && isValidHorasTrabajadas(horasTrabajadas))
     {
         this->horasTrabajadas=horasTrabajadas;
         retorno=0;
@@ -112,7 +117,7 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 int employee_setSueldo(Employee* this,int sueldo)
 {
     int retorno=-1;
-    if(this!=NULL)
+    if(this!=NULL && isValidSueldo(sueldo))
     {
         this->sueldo=sueldo;
         retorno=0;
@@ -131,3 +136,48 @@ int employee_getSueldo(Employee* this,int* sueldo)
     return retorno;
 }
 
+static int isValidId(int id)
+{
+    //return !isInt(id);
+    return 1;
+}
+static int isValidNombre(char* nombre)
+{
+    //return !isLetter(nombre);
+    return 1;
+}
+static int isValidHorasTrabajadas(int horasTrabajadas)
+{
+    //return !isInt(horasTrabajadas);
+    return 1;
+}
+static int isValidSueldo(int sueldo)
+{
+    //return !isInt(sueldo);
+    return 1;
+}
+//int employee_criterioNombre(void)
+
+int employee_compareBySueldo(void* pEmp1,void* pEmp2)
+{
+
+    if(((Employee*)pEmp1)->sueldo > ((Employee*)pEmp2)->sueldo)
+    {
+        return 1;
+    }
+    if(((Employee*)pEmp1)->sueldo < ((Employee*)pEmp2)->sueldo)
+    {
+        return -1;
+    }
+    return 0;
+}
+
+int employee_compareByName(void* pEmp1, void* pEmp2)
+{
+    char nameEmp1[128];
+    employee_getNombre((Employee*)pEmp1, nameEmp1);
+    char nameEmp2[128];
+    employee_getNombre((Employee*)pEmp1, nameEmp2);
+    //int ret;
+    return  strcmp(nameEmp1, nameEmp2);
+}
