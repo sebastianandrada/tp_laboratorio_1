@@ -1,7 +1,8 @@
-#include <stdio_ext.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "utn.h"
+#include <ctype.h>
 
 static int getInt(int* pResultado);
 static int esNumero(char* pCadena);
@@ -34,7 +35,8 @@ int utn_getInt(int* pInt,int reintentos,char* msg, char*msgErr,int min, int max)
         else
         {
             printf("%s", msgErr);
-            __fpurge(stdin);
+            //__fpurge(stdin);
+            fflush(stdin);
         }
     }
     return retorno;
@@ -157,7 +159,8 @@ static int getString(char* pBuffer, int limite)
     int retorno = -1;
     if(pBuffer != NULL && limite > 0)
     {
-        __fpurge(stdin);
+        //__fpurge(stdin);
+        fflush(stdin);
         fgets(bufferString, sizeof(bufferString), stdin);
         if(bufferString[strlen(bufferString)-1] == '\n')
         {
@@ -173,12 +176,69 @@ static int getString(char* pBuffer, int limite)
 
     return retorno;
 }
-/*
-int utn_getNombre(char* pNombre, char* msg, char msgErr[])
+int isLetter(char* pBuffer)
 {
-    //int retorno = -1;
-    char buffer[4096];
-    getString(buffer);
-    return 0;
-    //return retorno;
-}*/
+    int i=0;
+    int retorno=0;
+    int flag=0;
+    while(pBuffer[i] != '\0')
+    {
+        if(flag==0)
+        {
+            pBuffer[i]=toupper(pBuffer[i]);
+            flag=1;
+        }else if ((pBuffer[i]< 'A' || pBuffer[i] > 'Z') &&
+                (pBuffer[i]< 'a' || pBuffer[i] > 'z') &&
+                (pBuffer[i]!= ' ') && ( pBuffer[i] != '.'))
+        {
+            retorno=-1;
+            break;
+        }
+        i++;
+    }
+
+    return retorno;
+}
+
+int isFloat(char* pBuffer)
+{
+    int i=0;
+    int retorno=0;
+    int contadorPuntos=0;
+    while(pBuffer[i] != '\0')
+    {
+        if(pBuffer[i] == '.' && contadorPuntos==0)
+        {
+            contadorPuntos++;
+            i++;
+            continue;
+        }
+        if(pBuffer[i] < '0' || pBuffer[i] > '9')
+        {
+            retorno=-1;
+            break;
+        }
+        i++;
+    }
+
+    return retorno;
+}
+
+int isInt(char* pBuffer)
+{
+    int i=0;
+    int retorno=0;
+    while(pBuffer[i] != '\0')
+    {
+        if(pBuffer[i] < '0' || pBuffer[i] > '9')
+        {
+            retorno=-1;
+            break;
+        }
+        i++;
+    }
+
+    return retorno;
+}
+
+

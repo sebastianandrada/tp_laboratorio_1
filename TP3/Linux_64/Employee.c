@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "utn.h"
 
 static int isValidId(char* id);
 static int isValidNombre(char* nombre);
@@ -25,9 +26,8 @@ Employee* employee_newParametros(char* idStr,char* nombreStr, char* horasTrabaja
     Employee* this;
     this=employee_new();
 
-    //if() validar idStr
-
     if(
+    isValidId(idStr) &&
     !employee_setId(this,atoi(idStr))&&
     !employee_setNombre(this,nombreStr)&&
     !employee_setHorasTrabajadas(this,atoi(horasTrabajadasStr))&&
@@ -43,7 +43,7 @@ int employee_setId(Employee* this,int id)
     int retorno=-1;
     static int proximoId=-1;
 
-    if(this!=NULL && isValidId(id))
+    if(this!=NULL)
     {
         proximoId++;
         this->id=proximoId;
@@ -137,32 +137,32 @@ int employee_getSueldo(Employee* this,int* sueldo)
 
 static int isValidId(char* id)
 {
-    return 1;
+    return !isInt(id);
 }
 static int isValidNombre(char* nombre)
 {
-    return 1;
+    return !isLetter(nombre);
 }
 static int isValidHorasTrabajadas(int horasTrabajadas)
 {
-    return 1;
+    return horasTrabajadas<1000 && horasTrabajadas > 0;
 }
 static int isValidSueldo(int sueldo)
 {
-    return 1;
+    return sueldo > 0 && sueldo < 5000000;
 }
-//int employee_criterioNombre(void)
 
-int employee_compareBySueldo(void* pEmployeeA,void* pEmployeeB)
+int employee_compareBySueldo(void* pEmp1,void* pEmp2)
 {
 
-    if(((Employee*)pEmployeeA)->sueldo > ((Employee*)pEmployeeB)->sueldo)
+    if(((Employee*)pEmp1)->sueldo > ((Employee*)pEmp2)->sueldo)
     {
         return 1;
     }
-    if(((Employee*)pEmployeeA)->sueldo < ((Employee*)pEmployeeB)->sueldo)
+    if(((Employee*)pEmp1)->sueldo < ((Employee*)pEmp2)->sueldo)
     {
         return -1;
     }
     return 0;
 }
+

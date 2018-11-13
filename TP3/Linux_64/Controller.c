@@ -5,8 +5,6 @@
 #include "parser.h"
 #include "utn.h"
 
-static int compareEmployee(void* pEmployeeA,void* pEmployeeB);
-//static int compararEmpleados(void* pEmp1, void* pEmp2);
 static int findEmployeeById(LinkedList *pArrayListEmployee, int id);
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
@@ -20,7 +18,7 @@ int controller_loadFromText(char *path, LinkedList *pArrayListEmployee)
 {
     int retorno = -1;
     FILE *pFile;
-    pFile = fopen(path, "r");
+    pFile = fopen("data.csv", "r");
     if (pFile == NULL)
     {
         printf("\nEl archivo no puede ser abierto");
@@ -64,8 +62,6 @@ int controller_loadFromBinary(char *path, LinkedList *pArrayListEmployee)
  */
 int controller_addEmployee(LinkedList *pArrayListEmployee)
 {
-    /*Employee* auxEmployee1 = employee_newParametros("-1", "Pedro", "1255", "40000");
-    ll_add(pArrayListEmployee, auxEmployee1);*/
     int retorno = -1;
     char auxName[128];
     char auxHorasTrabajadas[40];
@@ -80,6 +76,7 @@ int controller_addEmployee(LinkedList *pArrayListEmployee)
         retorno = 0;
         auxEmployee = employee_newParametros("-1", auxName, auxHorasTrabajadas, auxSueldo);
         ll_add(pArrayListEmployee, auxEmployee);
+        printf("Carga exitosa!");
     }
 
     return retorno;
@@ -126,12 +123,9 @@ int controller_editEmployee(LinkedList *pArrayListEmployee)
  */
 int controller_removeEmployee(LinkedList *pArrayListEmployee)
 {
-    //get posicion del emp
-    //free a eso
-    // y luego remove espacion en memoria
     int retorno = -1;
     int id;
-    utn_getInt(&id, 3, "Ingrese id del empleado a editar: ", "Id invalido", 0, 40000);
+    utn_getInt(&id, 3, "Ingrese id del empleado a eliminar: ", "Id invalido", 0, 40000);
     int index = findEmployeeById(pArrayListEmployee, id);
     if (index != -1 && pArrayListEmployee != NULL)
     {
@@ -200,6 +194,7 @@ int controller_sortEmployee(LinkedList *pArrayListEmployee)
     return 1;
 }
 
+
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
  *
  * \param path char*
@@ -210,6 +205,7 @@ int controller_sortEmployee(LinkedList *pArrayListEmployee)
 int controller_saveAsText(char *path, LinkedList *pArrayListEmployee)
 {
     FILE* pArchivo = fopen(path, "w");
+    int retorno = -1;
     Employee* pEmpleado;
     int auxId;
     char auxNombre[128];
@@ -230,9 +226,10 @@ int controller_saveAsText(char *path, LinkedList *pArrayListEmployee)
             employee_getSueldo(pEmpleado, &auxSueldo);
             fprintf(pArchivo, "%d,%s,%d,%d\n", auxId, auxNombre, auxHoras, auxSueldo);
         }
+        retorno = 1;
     }
     fclose(pArchivo);
-    return 1;
+    return retorno;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
@@ -245,6 +242,7 @@ int controller_saveAsText(char *path, LinkedList *pArrayListEmployee)
 int controller_saveAsBinary(char *path, LinkedList *pArrayListEmployee)
 {
     FILE* pArchivo = fopen(path, "wb");
+    int retorno = -1;
     Employee* pEmpleado;
     int i;
     int len = ll_len(pArrayListEmployee);
@@ -255,11 +253,20 @@ int controller_saveAsBinary(char *path, LinkedList *pArrayListEmployee)
             pEmpleado = ll_get(pArrayListEmployee, i);
             fwrite(pEmpleado, sizeof(Employee), 1,pArchivo);
         }
+        retorno = 1;
     }
     fclose(pArchivo);
-    return 1;
+    return retorno;
 }
 
+/** \brief find an Employee by Id en returns the index position in LinkedList.
+*
+* \param list LinkedList*
+* \param id int
+* \return Return employee index position or (-1) if [Invalid length or NULL
+pointer received or employee not found]
+*
+*/
 static int findEmployeeById(LinkedList *pArrayListEmployee, int id)
 {
     int i;
@@ -284,20 +291,3 @@ static int findEmployeeById(LinkedList *pArrayListEmployee, int id)
     return index;
 }
 
-/*static int compararEmpleados(void* pEmp1, void* pEmp2)
-{
-    int auxSueldoEmp1;
-    employee_getSueldo((Employee*)pEmp1, &auxSueldoEmp1);
-    int auxSueldoEmp2;
-    employee_getSueldo((Employee*)pEmp1, &auxSueldoEmp2);
-
-    if(auxSueldoEmp1 > auxSueldoEmp2)
-    {
-        return 1;
-    }
-    if(auxSueldoEmp1 < auxSueldoEmp2)
-    {
-        return -1;
-    }
-    return 0;
-}*/
